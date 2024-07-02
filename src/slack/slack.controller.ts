@@ -3,7 +3,7 @@ import { SlackService } from './slack.service';
 import { CreateExperimentDto } from './dto/create-experiment.dto';
 import { UpdateExperimentDto } from './dto/update-experiment.dto';
 
-@Controller('experiment')
+@Controller('slack')
 export class SlackController {
   constructor(private readonly experimentService: SlackService) {}
 

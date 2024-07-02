@@ -12,3 +12,49 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// Models
+model User {
+  id                 String               @id @default(cuid())
+  name               String
+  slackMemberId      String               @unique
+  UsersOnExperiments UsersOnExperiments[]
+}
+
+model Experiment {
+  id          String @id @default(cuid())
+  name        String
+  description String
+
+  status ExperimentStatus @default(QUEUED)
+
+  startedAt DateTime  @default(now())
+  failedAt  DateTime?
+  endedAt   DateTime?
+
+  UsersOnExperiments UsersOnExperiments[]
+}
+
+model UsersOnExperiments {
+  id           String     @id @default(cuid())
+  user         User       @relation(fields: [userId], references: [id])
+  experiment   Experiment @relation(fields: [experimentId], references: [id])
+  userId       String
+  experimentId String
+
+  userRole UserRole
+
+  @@unique([userId, experimentId])
+}
+
+enum UserRole {
+  OWNER
+  VIEWER
+}
+
+enum ExperimentStatus {
+  QUEUED
+  IN_PROGRESS
+  SUCCESS
+  EXCEPTION
+}

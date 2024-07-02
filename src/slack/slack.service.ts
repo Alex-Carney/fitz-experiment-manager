@@ -3,7 +3,7 @@ import { CreateExperimentDto } from './dto/create-experiment.dto';
 import { UpdateExperimentDto } from './dto/update-experiment.dto';
 
 @Injectable()
-export class ExperimentService {
+export class SlackService {
   create(createExperimentDto: CreateExperimentDto) {
     return 'This action adds a new experiment';
   }

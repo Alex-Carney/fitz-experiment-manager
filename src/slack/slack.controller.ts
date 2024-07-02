@@ -1,11 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ExperimentService } from './experiment.service';
+import { SlackService } from './slack.service';
 import { CreateExperimentDto } from './dto/create-experiment.dto';
 import { UpdateExperimentDto } from './dto/update-experiment.dto';
 
 @Controller('experiment')
-export class ExperimentController {
-  constructor(private readonly experimentService: ExperimentService) {}
+export class SlackController {
+  constructor(private readonly experimentService: SlackService) {}
 
   @Post()
   create(@Body() createExperimentDto: CreateExperimentDto) {
